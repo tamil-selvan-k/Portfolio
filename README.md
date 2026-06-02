@@ -37,9 +37,7 @@ I enjoy working across frontend, backend, and cloud environments, and I’m **ea
 ## 📬 Contact
 
 - **LinkedIn:** https://www.linkedin.com/in/tamilselvan2007  
-- **Email:** tamilselvan.k.dev@gmail.com  
+- **Email:** tamilselvan.k.dev@gmail.com
 
 ---
-
-> Designed, customized, and maintained by **Tamil Selvan K**  
 > Always learning. Always building. 🚀
