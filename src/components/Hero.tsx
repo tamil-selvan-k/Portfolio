@@ -161,7 +161,7 @@ const Hero = () => {
               {/* Image Container */}
               <div className="relative h-full w-full rounded-2xl overflow-hidden border border-white/10 bg-card/50 backdrop-blur-sm shadow-2xl transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
                 <img
-                  src="/profile.png"
+                  src="/profile.webp"
                   alt="Tamil Selvan K"
                   className="object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
                 />
