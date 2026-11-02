@@ -103,11 +103,11 @@ const Projects = () => {
               >
                 {/* Screenshot / placeholder */}
                 {project.screenshot ? (
-                  <div className="h-44 overflow-hidden border-b border-border">
+                  <div className={`overflow-hidden border-b border-border ${project.featured ? "h-72" : "h-44"}`}>
                     <img
                       src={project.screenshot}
                       alt={`${project.title} screenshot`}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      className={`w-full h-full group-hover:scale-105 transition-transform duration-500 ${project.featured ? "object-contain object-top" : "object-cover object-top"}`}
                     />
                   </div>
                 ) : (
