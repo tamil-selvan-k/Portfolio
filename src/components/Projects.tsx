@@ -8,6 +8,7 @@ const projects = [
   {
     title: "Placement Readiness Platform",
     subtitle: "Voice-First AI Mock Interview System",
+    screenshot: "/screenshots/Screenshot 2026-11-02 203802.png",
     bullets: [
       "Engineered an AI-powered interview platform that assesses student proficiency, identifies skill gaps, and provides structured placement pathways for 2,000–3,000 engineering candidates.",
       "Architected ultra-low latency interviews with real-time voice streaming and LLM-generated technical questions, reducing response latency by 85.7%.",
@@ -21,6 +22,7 @@ const projects = [
   {
     title: "DocGen",
     subtitle: "AI-Powered Documentation Generator",
+    screenshot: "/screenshots/Screenshot 2026-11-02 202621.png",
     bullets: [
       "Built a documentation automation SaaS that analyzes GitHub code changes and generates documentation updates using LLM.",
       "Established secure GitHub OAuth and GitHub App integration with repository-level authorization, webhook processing, and automated synchronization.",
@@ -34,6 +36,7 @@ const projects = [
   {
     title: "API Rate Limiter",
     subtitle: "Production-Ready API Gateway with Rate Limiting",
+    screenshot: "/screenshots/Screenshot 2026-11-02 202429.png",
     bullets: [
       "Built a production-grade API access control system on the Token Bucket algorithm with atomic Redis Lua scripting for race-condition-free rate enforcement.",
       "Designed a modular layered backend (repository/service/controller) with a dark-themed React dashboard for real-time usage visualization.",
@@ -45,21 +48,9 @@ const projects = [
     featured: false,
   },
   {
-    title: "There You Go",
-    subtitle: "Smart Travel & Safety Platform",
-    bullets: [
-      "Built a comprehensive travel and safety solution for Smart India Hackathon with real-time safety alerts and intelligent route planning.",
-      "Integrated emergency response features and location-aware recommendations using the MERN stack.",
-      "Deployed a responsive, mobile-first UI with dynamic data rendering and live map integration.",
-    ],
-    tech: ["React", "Node.js", "MongoDB", "Express"],
-    github: "https://github.com/tamil-selvan-k/ThereYouGo",
-    liveUrl: "https://tamil-selvan-k.github.io/ThereYouGo/public/index.html",
-    featured: true,
-  },
-  {
     title: "QuiZz",
     subtitle: "Online Assessment Platform",
+    screenshot: "/screenshots/Screenshot 2026-11-02 202506.png",
     bullets: [
       "Built a scalable quiz platform designed for schools and universities to conduct online assessments for any number of concurrent candidates.",
       "Implemented high-concurrency API design validated through stress testing and high-level system design (HLD) principles.",
@@ -68,11 +59,12 @@ const projects = [
     tech: ["Stress-testing", "HLD", "React", "Node.js", "MongoDB", "Express"],
     github: "https://github.com/tamil-selvan-k/Quizz",
     liveUrl: "https://quizz-6.netlify.app/",
-    featured: true,
+    featured: false,
   },
   {
     title: "Tekh-bot",
     subtitle: "AI-Powered Technical Learning Assistant",
+    screenshot: "/screenshots/Screenshot 2026-11-02 202851.png",
     bullets: [
       "Built an intelligent chatbot for technical education using advanced search, fuzzy matching, and Levenshtein distance algorithms for accurate query resolution.",
       "Architected a Flask backend with an API layer for retrieval, web search, and LLM orchestration.",
@@ -105,10 +97,28 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className={`group p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300 ${
+                className={`group rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300 overflow-hidden ${
                   project.featured ? "md:col-span-2" : ""
                 }`}
               >
+                {/* Screenshot / placeholder */}
+                {project.screenshot ? (
+                  <div className="h-44 overflow-hidden border-b border-border">
+                    <img
+                      src={project.screenshot}
+                      alt={`${project.title} screenshot`}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ) : (
+                  <div className="h-44 border-b border-border bg-gradient-to-br from-primary/10 via-primary/5 to-transparent flex items-center justify-center">
+                    <span className="text-4xl font-bold text-primary/20 tracking-tight select-none">
+                      {project.title.split(" ").map(w => w[0]).join("").slice(0, 3)}
+                    </span>
+                  </div>
+                )}
+
+                <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="heading-md group-hover:text-primary transition-colors">{project.title}</h3>
@@ -153,6 +163,7 @@ const Projects = () => {
                       {tech}
                     </span>
                   ))}
+                </div>
                 </div>
               </motion.div>
             ))}
