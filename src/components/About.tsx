@@ -1,6 +1,29 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
+import { useRef, useEffect } from "react";
+
+const AnimatedStat = ({ end, suffix = "", decimals = 0, label }: { end: number; suffix?: string; decimals?: number; label: string }) => {
+  const count = useMotionValue(0);
+  const spring = useSpring(count, { stiffness: 60, damping: 18 });
+  const display = useTransform(spring, v => decimals > 0 ? v.toFixed(decimals) + suffix : Math.round(v) + suffix);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (isInView) count.set(end);
+  }, [isInView, count, end]);
+
+  return (
+    <motion.div
+      ref={ref}
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="text-center p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-default"
+    >
+      <motion.p className="text-2xl font-bold text-primary">{display}</motion.p>
+      <p className="text-xs text-muted-foreground mt-1">{label}</p>
+    </motion.div>
+  );
+};
 
 const About = () => {
   const ref = useRef(null);
@@ -39,17 +62,10 @@ const About = () => {
               <div className="p-6 rounded-xl bg-card border border-border h-full">
                 <h3 className="font-semibold mb-6 text-foreground">At a Glance</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { value: "3+", label: "Internships" },
-                    { value: "6", label: "Projects" },
-                    { value: "2000+", label: "Problems Solved" },
-                    { value: "9.03", label: "CGPA" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="text-center p-3 rounded-lg bg-secondary/50">
-                      <p className="text-2xl font-bold text-primary">{stat.value}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
-                    </div>
-                  ))}
+                  <AnimatedStat end={3} suffix="+" label="Internships" />
+                  <AnimatedStat end={6} label="Projects" />
+                  <AnimatedStat end={2000} suffix="+" label="Problems Solved" />
+                  <AnimatedStat end={9.03} decimals={2} label="CGPA" />
                 </div>
               </div>
             </div>

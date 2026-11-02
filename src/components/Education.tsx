@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+
 import { GraduationCap } from "lucide-react";
 
 const Education = () => {
@@ -18,7 +19,11 @@ const Education = () => {
         >
           <h2 className="heading-lg mb-12">Education</h2>
           
-          <div className="p-8 rounded-2xl bg-card border border-border">
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="p-8 rounded-2xl bg-card border border-border hover:border-primary/30 transition-colors duration-300"
+          >
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
               <GraduationCap className="w-8 h-8 text-primary" />
             </div>
@@ -39,7 +44,7 @@ const Education = () => {
                 <p className="text-lg font-medium">2024 - 2028</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

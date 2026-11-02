@@ -57,9 +57,11 @@ const CodingProfiles = () => {
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 style={{ borderLeftColor: profile.color, borderLeftWidth: '3px' }}
-                className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300"
+                className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors duration-300"
               >
                 <Code className="w-5 h-5" style={{ color: profile.color }} />
                 <span className="font-medium">{profile.name}</span>

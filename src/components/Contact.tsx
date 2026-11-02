@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Mail, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -221,10 +221,35 @@ const Contact = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full mt-6 gap-2"
+                  className="w-full mt-6"
                 >
-                  <Send className="h-4 w-4" />
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  <AnimatePresence mode="wait">
+                    {isSubmitting ? (
+                      <motion.span
+                        key="loading"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.15 }}
+                        className="flex items-center gap-2"
+                      >
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Sending...
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="send"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.15 }}
+                        className="flex items-center gap-2"
+                      >
+                        <Send className="h-4 w-4" />
+                        Send Message
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
                 </Button>
               </form>
             </motion.div>
