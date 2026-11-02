@@ -12,7 +12,7 @@ const profiles = [
   {
     name: "AtCoder",
     url: "https://atcoder.jp/users/tamildev",
-    color: "#1a1a1a",
+    color: "#A0A0A0",
   },
   {
     name: "Codeforces",
@@ -58,9 +58,10 @@ const CodingProfiles = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: index * 0.1, duration: 0.4 }}
+                style={{ borderLeftColor: profile.color, borderLeftWidth: '3px' }}
                 className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300"
               >
-                <Code className="w-5 h-5 text-primary" />
+                <Code className="w-5 h-5" style={{ color: profile.color }} />
                 <span className="font-medium">{profile.name}</span>
                 <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
               </motion.a>

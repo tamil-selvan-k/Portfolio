@@ -31,7 +31,7 @@ const Education = () => {
             <div className="flex items-center justify-center gap-8 text-sm">
               <div>
                 <span className="text-muted-foreground">CGPA</span>
-                <p className="text-2xl font-bold text-primary">9.102</p>
+                <p className="text-2xl font-bold text-primary">9.03</p>
               </div>
               <div className="w-px h-12 bg-border" />
               <div>

@@ -5,18 +5,43 @@ import { Briefcase } from "lucide-react";
 
 const experiences = [
   {
-    title: "Full Stack Developer Intern",
-    company: "Klickkit",
-    description:
-      "Optimized and enhanced responsive UIs for production applications while designing well-structured databases and developing scalable, optimized backend services using Node.js and Express. Collaborated closely with the testing team to validate features using Selenium and improve system reliability. Deployed applications to cloud infrastructure, gaining strong practical understanding of cloud environments and performance optimization.",
-    highlights: ["Production Systems", "Node.js & Express", "React JS", "Scalable Architecture", "Cloud Deployment"],
+    title: "Software Development Engineer",
+    company: "SODAK Technology",
+    startDate: "Aug 2026",
+    endDate: "Present",
+    type: "Full-time",
+    bullets: [
+      "Architecting and developing sodakedutech.in as a production-grade dynamic full stack web application, built entirely from scratch using Next.js and PostgreSQL.",
+      "Deployed on AWS Amplify with automated CI/CD pipelines, driving the full development lifecycle from database schema design through frontend delivery.",
+      "Working within an Agile framework, independently owning end-to-end feature delivery on a live production system.",
+    ],
+    highlights: ["Next.js", "PostgreSQL", "AWS Amplify", "CI/CD", "Agile"],
   },
   {
-    title: "Web Developer Intern",
-    company: "GWING Software Technologies",
-    description:
-      "Built and refined frontend features for client projects. Worked extensively with JavaScript and CSS on real-world production projects, improving UI/UX and implementing responsive designs.",
-    highlights: ["Frontend Development", "JavaScript & CSS", "Client Projects", "Responsive Design"],
+    title: "Full Stack Developer Intern",
+    company: "Klickkit",
+    startDate: "Jun 2026",
+    endDate: "Aug 2026",
+    type: "Internship",
+    bullets: [
+      "Implemented lazy loading and optimized rendering, reducing page load time by 25%.",
+      "Enhanced production databases and developed scalable, optimized backend services using Node.js and Express.",
+      "Deployed applications to cloud infrastructure, gaining strong practical understanding of cloud environments and performance optimization.",
+    ],
+    highlights: ["Performance Optimization", "Node.js & Express", "React JS", "Cloud Deployment", "Database Design"],
+  },
+  {
+    title: "Software Developer Intern",
+    company: "Vittae Money",
+    startDate: "Nov 2025",
+    endDate: "Dec 2025",
+    type: "Internship",
+    bullets: [
+      "Developed responsive user interfaces using React and Nuxt.js for a fintech platform.",
+      "Built reusable UI components to improve maintainability and development efficiency.",
+      "Integrated frontend components with backend APIs for seamless data flow.",
+    ],
+    highlights: ["React", "Nuxt.js", "Component Architecture", "API Integration", "Fintech"],
   },
 ];
 
@@ -33,11 +58,11 @@ const Experience = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="heading-lg mb-12">Experience</h2>
-          
+
           <div className="relative">
             {/* Timeline line */}
             <div className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-border" />
-            
+
             <div className="space-y-8">
               {experiences.map((exp, index) => (
                 <motion.div
@@ -49,25 +74,32 @@ const Experience = () => {
                 >
                   {/* Timeline dot */}
                   <div className="absolute left-2 md:left-6 top-2 w-4 h-4 rounded-full bg-primary border-4 border-background" />
-                  
+
                   <div className="p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
                       <Briefcase className="w-4 h-4 text-primary" />
                       <span className="text-sm font-medium text-primary">{exp.company}</span>
+                      <span className="text-muted-foreground text-xs">·</span>
+                      <span className="text-xs text-muted-foreground">{exp.startDate} – {exp.endDate}</span>
+                      <span className="ml-auto px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary font-medium">
+                        {exp.type}
+                      </span>
                     </div>
-                    
+
                     <h3 className="heading-md mb-3">{exp.title}</h3>
-                    
-                    <p className="text-muted-foreground mb-4 leading-relaxed">
-                      {exp.description}
-                    </p>
-                    
+
+                    <ul className="space-y-1.5 mb-4">
+                      {exp.bullets.map((bullet, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+
                     <div className="flex flex-wrap gap-2">
                       {exp.highlights.map((highlight) => (
-                        <span
-                          key={highlight}
-                          className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary"
-                        >
+                        <span key={highlight} className="skill-badge text-xs">
                           {highlight}
                         </span>
                       ))}

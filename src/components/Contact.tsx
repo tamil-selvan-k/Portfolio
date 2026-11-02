@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Mail, MapPin, Send, CheckCircle2 } from "lucide-react";
@@ -140,19 +140,21 @@ const Contact = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <form onSubmit={handleSubmit} className="space-y-4">
-                {submitSuccess && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="flex items-center gap-3 p-4 rounded-lg bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900"
-                  >
-                    <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
-                    <p className="text-sm font-medium text-green-800 dark:text-green-300">
-                      Message sent successfully!
-                    </p>
-                  </motion.div>
-                )}
+                <AnimatePresence>
+                  {submitSuccess && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="flex items-center gap-3 p-4 rounded-lg bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900"
+                    >
+                      <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+                      <p className="text-sm font-medium text-green-800 dark:text-green-300">
+                        Message sent successfully!
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 <div>
                   <Label htmlFor="name" className="mb-2 block">
@@ -161,6 +163,7 @@ const Contact = () => {
                   <Input
                     id="name"
                     name="name"
+                    required
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your name"
@@ -176,6 +179,7 @@ const Contact = () => {
                     id="email"
                     name="email"
                     type="email"
+                    required
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@gmail.com"
@@ -190,6 +194,7 @@ const Contact = () => {
                   <Input
                     id="subject"
                     name="subject"
+                    required
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="What is this about?"
@@ -204,6 +209,7 @@ const Contact = () => {
                   <Textarea
                     id="message"
                     name="message"
+                    required
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Your message..."
