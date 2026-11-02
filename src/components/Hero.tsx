@@ -97,10 +97,10 @@ const Hero = () => {
 
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <a 
-                    href="./TamilSelvan_Resume.pdf" 
-                    download={'TamilSelvan_Resume.pdf'}
+                  <a
+                    href="https://drive.google.com/file/d/1trJFaq4O8EZqQA4cv_voQy91-jVOixqx/view?usp=drivesdk"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="icon-link"
                     aria-label="Download Resume"
                   >
@@ -156,14 +156,16 @@ const Hero = () => {
             <div className="relative group w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
               {/* Dynamic Glow Effect */}
               <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full opacity-60 group-hover:opacity-100 group-hover:bg-primary/30 transition-all duration-700" />
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-purple-500/50 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-all duration-500" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-indigo-500/50 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-all duration-500" />
               
               {/* Image Container */}
               <div className="relative h-full w-full rounded-2xl overflow-hidden border border-white/10 bg-card/50 backdrop-blur-sm shadow-2xl transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
                 <img
-                  src="/profile.webp"
+                  src="/Tamil_portfolio_landing.JPG"
                   alt="Tamil Selvan K"
-                  className="object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
+                  width={384}
+                  height={384}
+                  className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
                 />
               </div>
               

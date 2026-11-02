@@ -4,16 +4,15 @@ import { useRef } from "react";
 import { Award, Trophy } from "lucide-react";
 
 const certifications = [
-  { title: "SQL Certification", issuer: "HackerRank" },
-  { title: "Frontend Developer Certification", issuer: "Professional" },
-  { title: "Java (Basics)", issuer: "HackerRank" },
-  { title: "Networking Fundamentals", issuer: "Infosys Springboard" },
+  { title: "Redis Certified Developer Associate", issuer: "Redis", year: "2025" },
+  { title: "Oracle Cloud Infrastructure 2025 Certified Foundations Associate", issuer: "Oracle", year: "2025" },
 ];
 
 const achievements = [
   { title: "Academic Excellence Award", description: "12th grade topper" },
   { title: "1st Place Coding Competition", description: "University-level, 1000+ participants" },
-  { title: "1800+ Problems Solved", description: "SkillRack platform" },
+  { title: "GSSoC Mentor & Ambassador", description: "GirlScript Summer of Code — open source mentorship" },
+  { title: "OSCI Campus Lead", description: "Open Source Connect India — campus community lead" },
 ];
 
 const Certifications = () => {
@@ -28,10 +27,15 @@ const Certifications = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
+          <div className="mb-12">
+            <h2 className="heading-lg mb-4">Certifications & Achievements</h2>
+            <p className="text-muted-foreground">Verified credentials and recognized accomplishments.</p>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-12">
             {/* Certifications */}
             <div>
-              <h2 className="heading-lg mb-8">Certifications</h2>
+              <h3 className="heading-md mb-8">Certifications</h3>
               <div className="space-y-4">
                 {certifications.map((cert, index) => (
                   <motion.div
@@ -46,16 +50,16 @@ const Certifications = () => {
                     </div>
                     <div>
                       <h3 className="font-medium">{cert.title}</h3>
-                      <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+                      <p className="text-sm text-muted-foreground">{cert.issuer} · {cert.year}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
-            
+
             {/* Achievements */}
             <div>
-              <h2 className="heading-lg mb-8">Achievements</h2>
+              <h3 className="heading-md mb-8">Achievements</h3>
               <div className="space-y-4">
                 {achievements.map((achievement, index) => (
                   <motion.div
