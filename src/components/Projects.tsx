@@ -8,7 +8,7 @@ const projects = [
   {
     title: "Placement Readiness Platform",
     subtitle: "Voice-First AI Mock Interview System",
-    screenshot: "/screenshots/Screenshot 2026-11-02 203802.png",
+    screenshot: "/screenshots/placement-readiness-platform.png",
     bullets: [
       "Engineered an AI-powered interview platform that assesses student proficiency, identifies skill gaps, and provides structured placement pathways for 2,000–3,000 engineering candidates.",
       "Architected ultra-low latency interviews with real-time voice streaming and LLM-generated technical questions, reducing response latency by 85.7%.",
@@ -22,7 +22,7 @@ const projects = [
   {
     title: "DocGen",
     subtitle: "AI-Powered Documentation Generator",
-    screenshot: "/screenshots/Screenshot 2026-11-02 202621.png",
+    screenshot: "/screenshots/docgen.png",
     bullets: [
       "Built a documentation automation SaaS that analyzes GitHub code changes and generates documentation updates using LLM.",
       "Established secure GitHub OAuth and GitHub App integration with repository-level authorization, webhook processing, and automated synchronization.",
@@ -36,7 +36,7 @@ const projects = [
   {
     title: "API Rate Limiter",
     subtitle: "Production-Ready API Gateway with Rate Limiting",
-    screenshot: "/screenshots/Screenshot 2026-11-02 202429.png",
+    screenshot: "/screenshots/api-rate-limiter.png",
     bullets: [
       "Built a production-grade API access control system on the Token Bucket algorithm with atomic Redis Lua scripting for race-condition-free rate enforcement.",
       "Designed a modular layered backend (repository/service/controller) with a dark-themed React dashboard for real-time usage visualization.",
@@ -50,7 +50,7 @@ const projects = [
   {
     title: "QuiZz",
     subtitle: "Online Assessment Platform",
-    screenshot: "/screenshots/Screenshot 2026-11-02 202506.png",
+    screenshot: "/screenshots/quizz.png",
     bullets: [
       "Built a scalable quiz platform designed for schools and universities to conduct online assessments for any number of concurrent candidates.",
       "Implemented high-concurrency API design validated through stress testing and high-level system design (HLD) principles.",
@@ -64,7 +64,7 @@ const projects = [
   {
     title: "Tekh-bot",
     subtitle: "AI-Powered Technical Learning Assistant",
-    screenshot: "/screenshots/Screenshot 2026-11-02 202851.png",
+    screenshot: "/screenshots/tekh-bot.png",
     bullets: [
       "Built an intelligent chatbot for technical education using advanced search, fuzzy matching, and Levenshtein distance algorithms for accurate query resolution.",
       "Architected a Flask backend with an API layer for retrieval, web search, and LLM orchestration.",
