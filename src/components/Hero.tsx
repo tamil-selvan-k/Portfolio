@@ -7,7 +7,7 @@ const heroTooltipClassName =
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
       
@@ -180,14 +180,14 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.6 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-20 group p-2 rounded-full hover:bg-primary/10 transition-colors duration-300"
           onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            <ArrowDown className="w-5 h-5 text-muted-foreground" />
+            <ArrowDown className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
           </motion.div>
         </motion.div>
       </div>
