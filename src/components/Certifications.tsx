@@ -42,8 +42,9 @@ const Certifications = () => {
                     key={cert.title}
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border"
+                    whileHover={{ y: -2 }}
+                    transition={{ delay: index * 0.1, duration: 0.4, type: "spring", stiffness: 300, damping: 20 }}
+                    className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors duration-300"
                   >
                     <div className="p-2 rounded-lg bg-primary/10">
                       <Award className="w-5 h-5 text-primary" />
@@ -66,8 +67,9 @@ const Certifications = () => {
                     key={achievement.title}
                     initial={{ opacity: 0, x: 20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border"
+                    whileHover={{ y: -2 }}
+                    transition={{ delay: index * 0.1, duration: 0.4, type: "spring", stiffness: 300, damping: 20 }}
+                    className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors duration-300"
                   >
                     <div className="p-2 rounded-lg bg-primary/10">
                       <Trophy className="w-5 h-5 text-primary" />

@@ -87,10 +87,12 @@ const Skills = () => {
                 <motion.div
                   key={category.title}
                   variants={itemVariants}
-                  className="p-6 rounded-xl bg-card border border-border"
+                  whileHover={{ y: -4, boxShadow: "0 8px 30px -8px hsl(217 91% 60% / 0.25)" }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="group p-6 rounded-xl bg-card border border-border hover:border-primary/30"
                 >
                   <div className="flex items-center gap-2 mb-4">
-                    <CategoryIcon className="w-5 h-5 text-primary" />
+                    <CategoryIcon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
                     <h3 className="font-semibold text-primary">{category.title}</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">

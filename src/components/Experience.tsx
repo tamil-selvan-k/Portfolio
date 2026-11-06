@@ -61,7 +61,12 @@ const Experience = () => {
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-border" />
+            <motion.div
+              className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-border origin-top"
+              initial={{ scaleY: 0 }}
+              animate={isInView ? { scaleY: 1 } : {}}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+            />
 
             <div className="space-y-8">
               {experiences.map((exp, index) => (
@@ -70,12 +75,20 @@ const Experience = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: index * 0.15, duration: 0.5 }}
-                  className="relative pl-12 md:pl-20"
+                  className="relative pl-12 md:pl-20 group"
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute left-2 md:left-6 top-2 w-4 h-4 rounded-full bg-primary border-4 border-background" />
+                  {/* Timeline dot + glow ring */}
+                  <div className="absolute left-2 md:left-6 top-2">
+                    <div className="absolute inset-0 rounded-full bg-primary/25 scale-0 group-hover:scale-[2.8] transition-transform duration-300 ease-out" />
+                    <motion.div
+                      className="relative w-4 h-4 rounded-full bg-primary border-4 border-background group-hover:shadow-[0_0_10px_2px_hsl(217_91%_60%_/_0.5)] transition-shadow duration-300"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                      transition={{ delay: index * 0.15 + 0.4, type: "spring", stiffness: 400, damping: 15 }}
+                    />
+                  </div>
 
-                  <div className="p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors">
+                  <div className="p-6 rounded-xl bg-card border border-border group-hover:border-primary/30 group-hover:shadow-lg group-hover:shadow-primary/10 transition-all duration-300">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
                       <Briefcase className="w-4 h-4 text-primary" />
                       <span className="text-sm font-medium text-primary">{exp.company}</span>

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { Github, ExternalLink } from "lucide-react";
 
 
+
 const projects = [
   {
     title: "Placement Readiness Platform",
@@ -96,8 +97,9 @@ const Projects = () => {
                 key={project.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className={`group rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300 overflow-hidden ${
+                whileHover={{ y: -3 }}
+                transition={{ delay: index * 0.1, duration: 0.5, type: "spring", stiffness: 250, damping: 18 }}
+                className={`group rounded-xl bg-card border border-border hover:border-primary/30 transition-colors duration-300 overflow-hidden ${
                   project.featured ? "md:col-span-2" : ""
                 }`}
               >
@@ -126,25 +128,29 @@ const Projects = () => {
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     {project.liveUrl && (
-                      <a
+                      <motion.a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        whileHover={{ scale: 1.15 }}
+                        whileTap={{ scale: 0.9 }}
                         className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary transition-colors"
                         aria-label={`View ${project.title} live`}
                       >
                         <ExternalLink className="w-5 h-5" />
-                      </a>
+                      </motion.a>
                     )}
-                    <a
+                    <motion.a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.9 }}
                       className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary transition-colors"
                       aria-label={`View ${project.title} on GitHub`}
                     >
                       <Github className="w-5 h-5" />
-                    </a>
+                    </motion.a>
                   </div>
                 </div>
 

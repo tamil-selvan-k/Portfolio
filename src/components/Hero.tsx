@@ -1,11 +1,84 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { Github, Linkedin, Mail, ArrowDown, CloudDownload } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useState, useEffect } from "react";
 
 const heroTooltipClassName =
   "rounded-sm border border-white/10 bg-[#2b2b2b] px-3 py-1.5 text-xs font-medium text-white shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm";
 
+const TITLE = "Full Stack Developer (MERN)";
+const MERN_START = TITLE.indexOf("(MERN)");
+
 const Hero = () => {
+  const [arrowVisible, setArrowVisible] = useState(true);
+  const [typedCount, setTypedCount] = useState(0);
+  const [typingDone, setTypingDone] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setArrowVisible(window.scrollY < window.innerHeight / 2);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    let typingInterval: ReturnType<typeof setInterval>;
+    let deletingInterval: ReturnType<typeof setInterval>;
+    let pauseTimeout: ReturnType<typeof setTimeout>;
+
+    const startTyping = () => {
+      setTypingDone(false);
+      setTypedCount(0);
+      let i = 0;
+      typingInterval = setInterval(() => {
+        i++;
+        setTypedCount(i);
+        if (i >= TITLE.length) {
+          clearInterval(typingInterval);
+          setTypingDone(true);
+          pauseTimeout = setTimeout(startDeleting, 2000);
+        }
+      }, 55);
+    };
+
+    const startDeleting = () => {
+      setTypingDone(false);
+      let i = TITLE.length;
+      deletingInterval = setInterval(() => {
+        i--;
+        setTypedCount(i);
+        if (i <= 0) {
+          clearInterval(deletingInterval);
+          pauseTimeout = setTimeout(startTyping, 500);
+        }
+      }, 30);
+    };
+
+    pauseTimeout = setTimeout(startTyping, 1000);
+
+    return () => {
+      clearInterval(typingInterval);
+      clearInterval(deletingInterval);
+      clearTimeout(pauseTimeout);
+    };
+  }, []);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-8, 8]);
+  const springRotateX = useSpring(rotateX, { stiffness: 150, damping: 20 });
+  const springRotateY = useSpring(rotateY, { stiffness: 150, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Subtle background gradient */}
@@ -41,15 +114,16 @@ const Hero = () => {
               Tamil Selvan K
             </motion.h1>
 
-            {/* Title */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl md:text-2xl text-muted-foreground mb-6"
-            >
-              Full Stack Developer <span className="text-primary">(MERN)</span>
-            </motion.p>
+            {/* Title — typewriter */}
+            <p className="text-xl md:text-2xl text-muted-foreground mb-6 min-h-[2rem]">
+              <span>{TITLE.slice(0, Math.min(typedCount, MERN_START))}</span>
+              {typedCount > MERN_START && (
+                <span className="text-primary">{TITLE.slice(MERN_START, typedCount)}</span>
+              )}
+              {!typingDone && (
+                <span className="inline-block w-0.5 h-5 bg-primary align-middle ml-0.5 animate-pulse" />
+              )}
+            </p>
 
             {/* Tagline */}
             <motion.p
@@ -152,14 +226,21 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative flex justify-center items-center order-1 md:order-2"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="relative group w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
               {/* Dynamic Glow Effect */}
               <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full opacity-60 group-hover:opacity-100 group-hover:bg-primary/30 transition-all duration-700" />
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-indigo-500/50 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-all duration-500" />
-              
+
               {/* Image Container */}
-              <div className="relative h-full w-full rounded-2xl overflow-hidden border border-white/10 bg-card/50 backdrop-blur-sm shadow-2xl transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
+              <motion.div
+                style={{ rotateX: springRotateX, rotateY: springRotateY, transformPerspective: 800 }}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                className="relative h-full w-full rounded-2xl overflow-hidden border border-white/10 bg-card/50 backdrop-blur-sm shadow-2xl"
+              >
                 <img
                   src="/Tamil_portfolio_landing.JPG"
                   alt="Tamil Selvan K"
@@ -167,7 +248,7 @@ const Hero = () => {
                   height={384}
                   className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </motion.div>
               
               {/* Accent element */}
               <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all duration-500" />
@@ -176,20 +257,25 @@ const Hero = () => {
         </div>
 
         {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-20 group p-2 rounded-full hover:bg-primary/10 transition-colors duration-300"
-          onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            <ArrowDown className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
-          </motion.div>
-        </motion.div>
+        <AnimatePresence>
+          {arrowVisible && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.4 }}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-20 group p-2 rounded-full hover:bg-primary/10 transition-colors duration-300"
+              onClick={() => window.scrollBy({ top: window.innerHeight, behavior: "smooth" })}
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <ArrowDown className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
